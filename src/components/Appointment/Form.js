@@ -9,24 +9,21 @@ export default function Form(props) {
 
 //function that resets the setStudent and setInntervier null
   function reset() {
-  
-
-  
+    setStudent("");
+    setInterviewer(null)
   } 
 
 //function that cancels when the user clicks on Cancel
   function cancel() {
-    setStudent("");
-    setInterviewer(null)
+    reset()
     props.onCancel();
-
   }
 
   
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
