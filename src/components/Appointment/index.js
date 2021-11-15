@@ -11,24 +11,17 @@ console.log(props)
 
   return (
     
-    <Fragment>
-      <Header {...props.time} />
+      <article className="appointment at">
+      <Header time={props.time}> </Header>
       {props.interview ? 
-      <>
-      <Show>
-
-      </Show>
-      </>
+      <Show student={props.interview.student}></Show>
       :
-      <>
-      <Empty>
-        
-      </Empty>
-      </>
+      <Empty></Empty>
+
       }
+      </article>
       
-      <article className="appointment at">{props.time}</article>
-    </Fragment>
-    
+      
+  
   )
 }
