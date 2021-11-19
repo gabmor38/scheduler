@@ -2,7 +2,7 @@ import React from "react";
 import Appointment from "components/Appointment/index";
 import "components/Application.scss";
 import DayList from "./DayList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const appointments = {
   "1": {
