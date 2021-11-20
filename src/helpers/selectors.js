@@ -4,7 +4,7 @@ export function getAppointmentsForDay(state, day) {
   //console.log("this is the days", day);
 
   //create empty array to store results
-  let appointments = [];
+  const appointments = [];
 
   //filter state name to match day name
   const filteredDays = state.days.filter(state => state.name === day);
