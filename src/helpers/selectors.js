@@ -1,5 +1,5 @@
 
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
   //console.log("this is the state", state);
   //console.log("this is the days", day);
 
@@ -10,7 +10,7 @@ export function getAppointmentsForDay(state, day) {
   const filteredDays = state.days.filter(state => state.name === day);
   //console.log("filteredDays", filteredDays);
 
-  //return  empty array if no appoointments
+  //return  empty array if no appointments
   if (filteredDays.length < 1) {
     return appointments;
   }
