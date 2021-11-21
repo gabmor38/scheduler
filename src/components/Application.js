@@ -4,8 +4,9 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import { STATEMENT_OR_BLOCK_KEYS } from "@babel/types";
-import getAppointmentsForDay from '../helpers/selectors';
+//import { STATEMENT_OR_BLOCK_KEYS } from "@babel/types";
+import {getAppointmentsForDay} from '../helpers/selectors';
+
 
 // const appointments = {
 //   "1": {
@@ -55,29 +56,31 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: []
   });
 
-  //helper function that returns appointment by day
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-
-  //function that updates the state with the new day
+ //function that updates the state with the new day
   const setDay = day => setState({ ...state, day });
   //const setDays = (days) => setState(prev => ({ ...prev, days }));
 
+ //helper function that returns appointment by day
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
   //iterate over the appointments
-  const appointmentArr = dailyAppointments.map(appointment => (
+  const appointmentArr = dailyAppointments.map(appointment => {
+    //const interview = getInterview(state, appointment.interview);
+    return (
     <Appointment
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
       interview={appointment.interview}
     />
-
-  ));
+    );
+  });
 
   //Promise to get data from days, appointments and interviewers
-
      useEffect(() => {
       Promise.all([
         axios.get(`/api/days`),
