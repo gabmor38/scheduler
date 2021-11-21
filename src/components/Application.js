@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 //import { STATEMENT_OR_BLOCK_KEYS } from "@babel/types";
 import {getAppointmentsForDay} from '../helpers/selectors';
-
+import { getInterview } from "../helpers/selectors";
 
 // const appointments = {
 //   "1": {
@@ -69,13 +69,13 @@ export default function Application(props) {
 
   //iterate over the appointments
   const appointmentArr = dailyAppointments.map(appointment => {
-    //const interview = getInterview(state, appointment.interview);
+    const interview = getInterview(state, appointment.interview);
     return (
     <Appointment
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
-      interview={appointment.interview}
+      interview={interview}
     />
     );
   });
