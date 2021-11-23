@@ -41,7 +41,7 @@ import InterviewerList from "components/InterviewerList";
 //     }
 //   }
 // };
-const getAppointmentsForDay =(state, day) => {
+const getAppointmentsForDay = (state, day) => {
   //console.log("this is the state", state);
   //console.log("this is the days", day);
 
@@ -63,35 +63,52 @@ const getAppointmentsForDay =(state, day) => {
       appointments.push(state.appointments[appId]);
     }
   });
-  
-  return appointments;
 
-}
+  return appointments;
+};
 //console.log(getAppointmentsForDay(state, "Monday"))
+const getInterviewersForDay = (state, day) => {
+  const interviewers = [];
+
+  //filter state by day
+  const filteredInterviewers = state.days.filter(state => state.name === day);
+  console.log("filteredInterviewers", filteredInterviewers);
+
+  //return  empty array if no appointments
+  if (filteredInterviewers.length < 1) {
+    //console.log("empty", appointments)
+    return interviewers;
+  }
+  //loop to push appointment for the day to the empty array
+  filteredInterviewers[0].interviewers.forEach((id) => {
+    if (state.interviewers[id]) {
+      interviewers.push(state.interviewers[id]);
+    }
+  });
+
+  return interviewers;
+};
+
 
 const getInterview = (state, interview) => {
 
   //if interview is null return null
-    if(interview === null ) {
-      return null
-    }
+  if (!interview) {
+    return null;
+  }
 
   //return interview with interviewer data
   // get the interviewer ID
   const interviewerId = interview.interviewer;
   //get the interviewer data 
-  const interviewerData = state.interviewers[interviewerId]
-    console.log(interviewerData)
+  const interviewerData = state.interviewers[interviewerId];
+  console.log(interviewerData);
   // create new Object with the student and interviewer data
   const interviewerObj = {
-  "student": interview.student,
-    "interviewer": {  
-    "id": interviewerData.id,
-    "name": interviewerData.name,
-    "avatar":interviewerData.avatar
-    }
-  }
+    "student": interview.student,
+    "interviewer": interviewerData
+  };
   return interviewerObj;
-}
+};
 
-export {getAppointmentsForDay, getInterview};
+export { getAppointmentsForDay, getInterview, getInterviewersForDay };

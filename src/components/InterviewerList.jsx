@@ -6,31 +6,8 @@ import InterviewerListItem from "./InterviewerListItem";
 export default function InterviewerList(props) {
   console.log("Interviewers",props);
 
-  // const interviewerData = props.interviewer;
-
-  // const interviewerListItems = InterviewerListItem.map((interviewerData) =>
-  //   <InterviewerListItem
-  //     key={interviewerData.id}
-  //     name={interviewerData.name}
-  //   />
-  // );
-
-  // const interviewers = (props.interviewers).map((interviewer) =>
-  
-  //   <InterviewerListItem
-  //     key={interviewer.id}
-  //     name={interviewer.name}
-  //     avatar={interviewer.avatar}
-  //     selected={interviewer.id === props.value}
-      //selected={interviewer.id === props.value}
-      //setInterviewer={() => onChange(interviewer.id)}  
-      //onChange={() => props.onChange(interviewer.id)}  
-  //     setInterviewer={() => props.setInterviewer(interviewer.id)}
-  //   />
-  // );
-
   const interviewers = props.interviewers.map(interviewer => {
-    
+    console.log("IntId", interviewer)
     return(<InterviewerListItem 
       key={interviewer.id} 
       name={interviewer.name} 
@@ -38,8 +15,9 @@ export default function InterviewerList(props) {
       selected={interviewer.id === props.value} 
       setInterviewer={() => props.onChange(interviewer.id)}
       />)
+      
   });
-  
+  console.log("interviewerList", interviewers)
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
