@@ -74,19 +74,28 @@ export default function Application(props) {
 
 // function that logs the values we pass 
 function bookInterview(id, interview) {
-
+  console.log("bookInter",id, interview);
+  
   const appointment = {
-    ...state.appointment[id],
-    interview:{...inteview}
-  }
-  console.log(id, interview);
-}
-function save(name, interviewer) {
-  const interview = {
-    student: name,
-    interviewer
+    ...state.appointments[id],
+    interview:{...interview}
   };
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+
+  return axios.put(`/api/appointments/${id}`, { interview })
+    .then(response => {
+      console.log("res", response.data)
+      setState({...state, appointments});
+    }).catch(error => {
+      console.log("Error", error);
+    });
 }
+
+
 
   //function that updates the state with the new day
   const setDay = day => setState({ ...state, day });
@@ -107,6 +116,7 @@ function save(name, interviewer) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
