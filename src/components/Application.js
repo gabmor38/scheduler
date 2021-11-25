@@ -72,84 +72,103 @@ export default function Application(props) {
     interviewers: []
   });
 
-// function that logs the values we pass 
-function bookInterview(id, interview) {
-  console.log("bookInter",id, interview);
-  
-  const appointment = {
-    ...state.appointments[id],
-    interview:{...interview}
-  };
+  // function that logs the values we pass 
+  function bookInterview(id, interview) {
+    console.log("bookInter", id, interview);
 
-  const appointments = {
-    ...state.appointments,
-    [id]: appointment
-  };
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
 
-  return axios.put(`/api/appointments/${id}`, { interview })
-    .then(response => {
-      console.log("res", response.data)
-      setState({...state, appointments});
-    }).catch(error => {
-      console.log("Error", error);
-    });
-}
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then(response => {
+        console.log("res", response.data);
+        setState({ ...state, appointments });
+      }).catch(error => {
+        console.log("Error", error);
+      });
+  }
+
+  function cancelInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id], interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return axios.delete(`/api/appointments/${id}`)
+      .then(response => {
+        console.log("res", response.data);
+        setState({ ...state, appointments });
+      }).catch(error => {
+        console.log("Error", error);
+      });
+  }
 
 
 
-  //function that updates the state with the new day
-  const setDay = day => setState({ ...state, day });
-  //const setDays = (days) => setState(prev => ({ ...prev, days }));
+//function that updates the state with the new day
+const setDay = day => setState({ ...state, day });
+//const setDays = (days) => setState(prev => ({ ...prev, days }));
 
-  //helper function that returns appointment by day
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
+//helper function that returns appointment by day
+const dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const interviewers = getInterviewersForDay(state, state.day);
-  //iterate over the appointments
-  const appointmentArr = dailyAppointments.map(appointment => {
-    const interview = getInterview(state, appointment.interview);
-
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-        interviewers={interviewers}
-        bookInterview={bookInterview}
-      />
-    );
-  });
-
+const interviewers = getInterviewersForDay(state, state.day);
+//iterate over the appointments
+const appointmentArr = dailyAppointments.map(appointment => {
+  const interview = getInterview(state, appointment.interview);
 
   return (
-    <main className="layout">
-      <section className="sidebar">
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
-        <img
-          className="sidebar--centered"
-          src="images/logo.png"
-          alt="Interview Scheduler"
-        />
-        <hr className="sidebar__separator sidebar--centered" />
-        <nav className="sidebar__menu">
-          <DayList
-            days={state.days}
-            value={state.day}
-            onChange={setDay}
-          />
-        </nav>
-        <img
-          className="sidebar__lhl sidebar--centered"
-          src="images/lhl.png"
-          alt="Lighthouse Labs"
-        />
-
-      </section>
-      <section className="schedule">
-        {appointmentArr}
-      </section>
-
-    </main>
+    <Appointment
+      key={appointment.id}
+      id={appointment.id}
+      time={appointment.time}
+      interview={interview}
+      interviewers={interviewers}
+      bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
+    />
   );
+});
+
+
+return (
+  <main className="layout">
+    <section className="sidebar">
+      {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
+      <img
+        className="sidebar--centered"
+        src="images/logo.png"
+        alt="Interview Scheduler"
+      />
+      <hr className="sidebar__separator sidebar--centered" />
+      <nav className="sidebar__menu">
+        <DayList
+          days={state.days}
+          value={state.day}
+          onChange={setDay}
+        />
+      </nav>
+      <img
+        className="sidebar__lhl sidebar--centered"
+        src="images/lhl.png"
+        alt="Lighthouse Labs"
+      />
+
+    </section>
+    <section className="schedule">
+      {appointmentArr}
+    </section>
+
+  </main>
+);
 }
