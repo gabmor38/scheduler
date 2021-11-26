@@ -7,9 +7,9 @@ export default function InterviewerList(props) {
   console.log("Interviewers",props);
 
   const interviewers = props.interviewers.map(interviewer => {
-    console.log("IntId", interviewer)
+    console.log("InterviewerID", interviewer)
     return(<InterviewerListItem 
-      key={interviewer.id} 
+      key={interviewer.id}
       name={interviewer.name} 
       avatar={interviewer.avatar} 
       selected={interviewer.id === props.value} 
@@ -17,7 +17,8 @@ export default function InterviewerList(props) {
       />)
       
   });
-  console.log("interviewerList", interviewers)
+  console.log("HELLO", interviewers)
+  console.log("HELLO2", props.value)
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
