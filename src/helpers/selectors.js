@@ -111,4 +111,31 @@ const getInterview = (state, interview) => {
   return interviewerObj;
 };
 
-export { getAppointmentsForDay, getInterview, getInterviewersForDay };
+
+const getSpots = (state, day) => {
+  let newArr = [];
+  let spots = 0;
+  for (const dayItem of state.days) {
+    if(dayItem.name === day){
+      newArr.push(...dayItem.appointments);
+    }
+  }
+  for(const appId of newArr) {
+    if(!state.appointments[appId].interview){
+      spots++
+    }
+  }
+  return spots
+}
+
+// const getDayIndex = (state, day) => {
+//   let indexNumber = 0
+//   for (const itemDay of state.days) {
+//     if(itemDay.name === day) {
+//       indexNumber = itemDay.id - 1
+//     }
+//   }
+//   return indexNumber
+// }
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay, getSpots};
