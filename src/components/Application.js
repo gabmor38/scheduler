@@ -7,9 +7,7 @@ import useApplicationData from "hooks/useApplicationData";
 
 //import { STATEMENT_OR_BLOCK_KEYS } from "@babel/types";
 
-
 export default function Application(props) {
-
   const {
     state,
     setDay,
@@ -42,13 +40,12 @@ const appointmentArr = dailyAppointments.map(appointment => {
 return (
   <main className="layout">
     <section className="sidebar">
-      {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       <img
         className="sidebar--centered"
         src="images/logo.png"
         alt="Interview Scheduler"
       />
-      <hr className="sidebar__separator sidebar--centered" />
+      <hr className="sidebar__separator sidebar--centered"/>
       <nav className="sidebar__menu">
         <DayList
           days={state.days}
