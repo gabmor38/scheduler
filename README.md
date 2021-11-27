@@ -1,5 +1,14 @@
 # Interview Scheduler
 
+## Screenshots
+
+!["Main Page"](https://github.com/gabmor38/scheduler/blob/master/public/images/Main.png?raw=true)
+
+!["Book Appointment"](https://github.com/gabmor38/scheduler/blob/master/public/images/BookAppointment.png?raw=true)
+
+!["Delete Appoinment"](https://github.com/gabmor38/scheduler/blob/master/public/images/Delete%20appointment.png?raw=true)
+
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -21,3 +30,4 @@ npm test
 ```sh
 npm run storybook
 ```
+
