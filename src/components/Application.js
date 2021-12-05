@@ -48,7 +48,7 @@ return (
       />
       <hr className="sidebar__separator sidebar--centered"/>
       <nav className="sidebar__menu">
-        <DayList
+        <DayList 
           days={state.days}
           value={state.day}
           onChange={setDay}
