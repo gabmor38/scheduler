@@ -5,6 +5,7 @@ import Appointment from "components/Appointment/index";
 import DayList from "./DayList";
 import useApplicationData from "hooks/useApplicationData";
 
+
 //import { STATEMENT_OR_BLOCK_KEYS } from "@babel/types";
 
 export default function Application(props) {
@@ -52,6 +53,7 @@ return (
           value={state.day}
           onChange={setDay}
         />
+        
       </nav>
       <img
         className="sidebar__lhl sidebar--centered"
