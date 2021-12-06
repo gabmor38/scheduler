@@ -117,9 +117,29 @@ describe('Application', () => {
     expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
   });
   
-  it("shows the delete error when failing to delete an existing appointment", () => {
-    axios.put.mockRejectedValueOnce();
+  it("shows the delete error when failing to delete an existing appointment", async() => {
+    axios.delete.mockRejectedValueOnce();
+    //Render the application
+    const {container} = render(<Application/>);
+    // Wait until the text "Archie Cohen" is displayed.
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    const appointment = getAllByTestId(container, "appointment").find(
+      appointment => queryByText(appointment, "Archie Cohen")
+    );
+    //click on the Delete button
+    fireEvent.click(queryByAltText(appointment, "Delete"));
+    // Click the "Confirm" button on the confirmation.
+    expect(getByText(appointment, /Delete the appointment/i)).toBeInTheDocument();
+    fireEvent.click(getByText(appointment, "Confirm"));
+     // Check that the element with the text "Deleting" is displayed.
+    expect(getByText(appointment, "Deleting")).toBeInTheDocument();
+    // Check that the error message is shown.
+    await waitForElement(() => getByText(appointment, "Error"));
+    const day = getAllByTestId(container, "day").find((day) =>
+      queryByText(day, "Monday")
+    );
+    // Check if in the correct mode
+    expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
   });
-
 });
 
