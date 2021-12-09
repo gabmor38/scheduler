@@ -64,6 +64,7 @@ return (
     </section>
     <section className="schedule">
       {appointmentArr}
+      <Appointment key="last" time="5pm"/>
     </section>
 
   </main>
