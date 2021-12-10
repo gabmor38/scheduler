@@ -13,16 +13,16 @@ The application is created using React, Webpack, Babel, Axios, StoryBook, Jest a
 !["Delete Appoinment"](https://github.com/gabmor38/scheduler/blob/master/public/images/Delete%20appointment.png?raw=true)
 
 ## Dependencies
-axios
-classnames
-node-sass
-normalize.css
-react
-react-dom
-react-scripts
-cypress
-node.js
-postgres
+- axios
+- classnames
+- node-sass
+- normalize.css
+- react
+- react-dom
+- react-scripts
+- cypress
+- node.js
+- postgres
 
 ## Setup
 
